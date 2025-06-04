@@ -58,6 +58,13 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ '--cds-button-danger-primary': '#d0000b' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = (args) => {
