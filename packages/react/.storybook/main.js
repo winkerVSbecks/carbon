@@ -96,6 +96,7 @@ const config = {
         },
       },
     },
+    '@storybook/addon-interactions',
   ],
   features: {
     previewCsfV3: true,

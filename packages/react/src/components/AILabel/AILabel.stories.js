@@ -9,6 +9,7 @@ import React from 'react';
 
 import { AILabel, AILabelContent, AILabelActions } from '.';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { userEvent, within, expect } from '@storybook/test';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
 import mdx from './AILabel.mdx';
@@ -489,4 +490,17 @@ Playground.argTypes = {
       disable: true,
     },
   },
+};
+
+Playground.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  const button = canvas.getByRole('button', {
+    name: 'AI Show information',
+  });
+
+  await userEvent.click(button);
+
+  // 👇 Assert DOM structure
+  await expect(canvas.getByText('AI Explained')).toBeInTheDocument();
 };

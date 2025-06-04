@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { userEvent, within, expect } from '@storybook/test';
 import {
   Tabs,
   TabsVertical,
@@ -197,6 +198,18 @@ export const Dismissable = () => {
       </Tabs>
     </>
   );
+};
+Dismissable.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByRole('tab', { name: 'Monitoring' }));
+  const monitoringPanel = canvas.getByRole('tabpanel', { name: 'Monitoring' });
+  await expect(monitoringPanel).toBeVisible();
+  await userEvent.click(
+    canvas.getByRole('button', {
+      name: 'Press delete to remove Monitoring tab',
+    })
+  );
+  await expect(monitoringPanel).not.toBeInTheDocument();
 };
 
 export const DismissableWithIcons = ({ contained }) => {
