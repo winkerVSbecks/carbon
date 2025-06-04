@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { userEvent, within, expect, screen } from '@storybook/test';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -16,6 +17,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { localeModes } from '../../../.storybook/modes';
 
 import mdx from './DatePicker.mdx';
 
@@ -151,9 +153,13 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ readOnly, ...args }) => {
+export const Default = ({ readOnly, ...args }, { globals }) => {
   return (
-    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
+    <DatePicker
+      datePickerType="single"
+      {...args}
+      readOnly={readOnly}
+      locale={globals.locale}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
@@ -173,11 +179,26 @@ export const Default = ({ readOnly, ...args }) => {
   );
 };
 
+Default.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const datePickerInput = canvas.getByLabelText('Date Picker label');
+  await userEvent.click(datePickerInput);
+};
+
 Default.argTypes = {
   ...sharedArgTypes,
   datePickerType: {
     options: ['single', 'simple', 'range'],
     control: { type: 'select' },
+  },
+};
+
+Default.parameters = {
+  chromatic: {
+    modes: {
+      en: localeModes['en'],
+      ar: localeModes['ar'],
+    },
   },
 };
 
