@@ -58,13 +58,6 @@ export default {
       page: mdx,
     },
   },
-  decorators: [
-    (Story) => (
-      <div style={{ '--cds-text-on-color': '#aaa' }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Default = (args) => {
