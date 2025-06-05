@@ -84,8 +84,8 @@ const config = {
      * Eventually they plan to attempt to get this back into the root addon with the storybook team.
      * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
      */
-    // '@storybook/addon-a11y',
-    'storybook-addon-accessibility-checker',
+    '@storybook/addon-a11y',
+    // 'storybook-addon-accessibility-checker',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -96,6 +96,7 @@ const config = {
         },
       },
     },
+    '@storybook/addon-interactions',
   ],
   features: {
     previewCsfV3: true,

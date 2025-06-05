@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { DataTable } from '..';
+import { themeModes } from '../../../../.storybook/modes';
 
 const {
   Table,
@@ -36,6 +37,14 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    chromatic: {
+      modes: {
+        white: themeModes['white'],
+        g10: themeModes['g10'],
+        g90: themeModes['g90'],
+        g100: themeModes['g100'],
+      },
     },
   },
 };
